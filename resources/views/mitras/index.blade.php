@@ -6,14 +6,15 @@
             <p class="text-sm text-slate-500 mt-1">Data mitra yang tampil pada marquee "Dipercaya Oleh" di landing page.</p>
         </div>
 
-        @if (session('success'))
-            <div class="bg-green-50 border-l-4 border-green-500 text-green-800 px-4 py-3 rounded-xl text-sm shadow-sm">{{ session('success') }}</div>
-        @endif
-
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div class="bg-white rounded-2xl border border-slate-200 p-6">
                 <h3 class="font-bold text-slate-900">Tambah Mitra</h3>
-                <form method="POST" action="{{ route('mitras.store') }}" enctype="multipart/form-data" class="mt-4 space-y-4">
+                <form method="POST" action="{{ route('mitras.store') }}" enctype="multipart/form-data" class="mt-4 space-y-4"
+                    data-confirm="Simpan mitra baru?"
+                    data-confirm-text="Mitra akan ditambahkan ke daftar mitra kerja sama."
+                    data-confirm-icon="question"
+                    data-confirm-color="#0284c7"
+                    data-confirm-button="Ya, Simpan">
                     @csrf
                     <div>
                         <label class="block text-sm font-semibold text-slate-700">Nama Perusahaan <span class="text-red-600">*</span></label>
@@ -48,7 +49,7 @@
                             <tr class="hover:bg-slate-50">
                                 <td class="px-5 py-3">
                                     @if ($m->photo)
-                                        <img src="{{ asset('uploads/mitra/' . $m->photo) }}" alt="{{ $m->name }}" class="w-16 h-12 rounded-lg object-cover border border-slate-100">
+                                        <img src="{{ asset('uploads/mitra/' . $m->photo) }}" alt="{{ $m->name }}" class="w-16 h-12 rounded-lg object-contain border border-slate-100 bg-slate-50 p-1">
                                     @else
                                         <div class="w-16 h-12 rounded-lg bg-sky-50 text-sky-400 flex items-center justify-center"><i class="fa-solid fa-building"></i></div>
                                     @endif
@@ -56,12 +57,20 @@
                                 <td class="px-5 py-3 font-semibold text-slate-800">{{ $m->name }}</td>
                                 <td class="px-5 py-3 text-slate-500">{{ $m->description ?? '-' }}</td>
                                 <td class="px-5 py-3 text-right">
-                                    <form method="POST" action="{{ route('mitras.destroy', $m) }}" class="inline" onsubmit="return confirm('Hapus mitra ini?')">
-                                        @csrf @method('DELETE')
-                                        <button class="h-8 px-3 rounded-lg bg-red-50 text-red-700 hover:bg-red-100 text-xs font-semibold">
-                                            <i class="fa-solid fa-trash mr-1"></i> Hapus
-                                        </button>
-                                    </form>
+                                    <div class="inline-flex items-center gap-1.5">
+                                        <a href="{{ route('mitras.edit', $m) }}" class="h-8 px-3 rounded-lg bg-sky-50 text-sky-700 hover:bg-sky-100 text-xs font-semibold">
+                                            <i class="fa-solid fa-pen mr-1"></i> Ubah
+                                        </a>
+                                        <form method="POST" action="{{ route('mitras.destroy', $m) }}" class="inline"
+                                            data-confirm="Hapus mitra ini?"
+                                            data-confirm-text="Foto mitra juga akan ikut dihapus dari server."
+                                            data-confirm-button="Ya, Hapus">
+                                            @csrf @method('DELETE')
+                                            <button class="h-8 px-3 rounded-lg bg-red-50 text-red-700 hover:bg-red-100 text-xs font-semibold">
+                                                <i class="fa-solid fa-trash mr-1"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
@@ -73,4 +82,4 @@
         </div>
 
     </div>
-</x-app-layout> 
+</x-app-layout>

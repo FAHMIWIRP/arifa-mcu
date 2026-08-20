@@ -11,11 +11,9 @@
             </a>
         </div>
 
-        @if (session('success'))
-            <div class="bg-green-50 border-l-4 border-green-500 text-green-800 px-4 py-3 rounded-xl text-sm shadow-sm">{{ session('success') }}</div>
-        @endif
+        {{-- Flash banner dihapus — sudah ditangani SweetAlert toast di layout --}}
 
-        <div class="bg-white rounded-2xl border border-slate-200">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
 
             <div class="p-4 border-b border-slate-100">
                 <form method="GET" action="{{ route('patients.index') }}" class="flex gap-2">
@@ -89,7 +87,9 @@
                                         </a>
                                         <div class="my-1 border-t border-slate-100"></div>
                                         <form method="POST" action="{{ route('patients.destroy', $patient) }}"
-                                            onsubmit="return confirm('Hapus data pasien ini?')">
+                                            data-confirm="Hapus data pasien ini?"
+                                            data-confirm-text="Seluruh data MCU pasien juga akan ikut terhapus."
+                                            data-confirm-button="Ya, Hapus">
                                             @csrf @method('DELETE')
                                             <button type="submit"
                                                 class="w-full flex items-center gap-3 px-4 py-2 text-xs font-semibold text-red-600 hover:bg-red-50">
@@ -106,7 +106,7 @@
                 </tbody>
             </table>
 
-            <div class="p-4 border-t border-slate-100 rounded-b-2xl">{{ $patients->links() }}</div>
+            <div class="p-4 border-t border-slate-100">{{ $patients->links() }}</div>
         </div>
 
     </div>

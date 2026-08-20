@@ -8,6 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -101,7 +102,11 @@
                         <p class="text-xs text-slate-400 truncate">{{ Auth::user()->email }}</p>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('logout') }}" class="mt-3">
+                <form method="POST" action="{{ route('logout') }}" class="mt-3"
+                    data-confirm="Keluar dari sistem?"
+                    data-confirm-text="Anda akan diarahkan kembali ke halaman login."
+                    data-confirm-icon="question"
+                    data-confirm-button="Ya, Keluar">
                     @csrf
                     <button class="w-full bg-red-50 text-red-600 hover:bg-red-100 rounded-xl py-2 text-sm font-semibold">
                         <i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar
@@ -115,5 +120,72 @@
                 {{ $slot }}
             </main>
         </div>
+
+        {{-- SweetAlert2 CDN + Konfigurasi Global --}}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            // Toast untuk flash message sukses / error
+            @if (session('success'))
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: @json(session('success')),
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: '#fff',
+                    color: '#0f172a',
+                });
+            @endif
+
+            @if (session('error'))
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: @json(session('error')),
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true,
+                });
+            @endif
+
+            @if ($errors->any())
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ada yang kurang lengkap',
+                    html: `{!! implode('<br>', $errors->all()) !!}`,
+                    confirmButtonColor: '#0284c7',
+                });
+            @endif
+
+            // Konfirmasi otomatis untuk semua form dengan atribut data-confirm
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('form[data-confirm]').forEach(form => {
+                    form.addEventListener('submit', e => {
+                        e.preventDefault();
+                        Swal.fire({
+                            title: form.dataset.confirm || 'Yakin?',
+                            text: form.dataset.confirmText || 'Tindakan ini tidak dapat dibatalkan.',
+                            icon: form.dataset.confirmIcon || 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: form.dataset.confirmColor || '#dc2626',
+                            cancelButtonColor: '#64748b',
+                            confirmButtonText: form.dataset.confirmButton || 'Ya, Lanjutkan',
+                            cancelButtonText: 'Batal',
+                            reverseButtons: true,
+                            customClass: {
+                                popup: 'rounded-2xl',
+                                confirmButton: 'rounded-xl px-5 py-2.5 font-semibold',
+                                cancelButton: 'rounded-xl px-5 py-2.5 font-semibold',
+                            },
+                        }).then(result => {
+                            if (result.isConfirmed) form.submit();
+                        });
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

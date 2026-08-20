@@ -90,19 +90,42 @@
     </div>
 </section>
 
-{{-- BANNER BPJS --}}
+{{-- BANNER BPJS DENGAN FOTO (LOGO UTUH, RESPONSIF) --}}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
-    <div class="rounded-2xl border border-green-200 bg-green-50 px-6 py-4 flex flex-wrap items-center gap-4" data-aos="fade-up">
-        <div class="w-11 h-11 rounded-xl bg-green-600 text-white flex items-center justify-center text-xl">
-            <i class="fa-solid fa-hand-holding-medical"></i>
+    <div class="rounded-3xl border border-green-200 bg-green-50 overflow-hidden grid lg:grid-cols-2" data-aos="fade-up">
+        <div class="p-8 lg:p-10 flex flex-col justify-center">
+            <span class="inline-flex items-center gap-2 w-fit bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">
+                <i class="fa-solid fa-hand-holding-medical"></i> Kerja Sama Resmi
+            </span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-green-900 mt-4">Menerima Layanan BPJS Kesehatan</h2>
+            <p class="text-sm md:text-base text-green-800 mt-3 leading-relaxed">
+                Arifa Medikal Klinik melayani pemeriksaan bagi peserta BPJS Kesehatan
+                sesuai ketentuan yang berlaku — dengan pelayanan setara pasien umum.
+            </p>
+            <ul class="mt-5 space-y-2 text-sm font-semibold text-green-800">
+                <li><i class="fa-solid fa-circle-check mr-2"></i>Alur klaim dibantu petugas</li>
+                <li><i class="fa-solid fa-circle-check mr-2"></i>Pelayanan setara pasien umum</li>
+                <li><i class="fa-solid fa-circle-check mr-2"></i>Tenaga medis bersertifikat</li>
+            </ul>
+            <a href="{{ route('page.kontak') }}" class="mt-6 w-fit bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-6 py-3 rounded-xl">
+                Info selengkapnya <i class="fa-solid fa-arrow-right ml-1"></i>
+            </a>
         </div>
-        <div class="flex-1 min-w-[220px]">
-            <p class="font-bold text-green-800">Menerima Layanan BPJS Kesehatan</p>
-            <p class="text-sm text-green-700">Arifa Medikal Klinik melayani pemeriksaan bagi peserta BPJS Kesehatan sesuai ketentuan yang berlaku.</p>
+        <div class="relative h-56 md:h-72 lg:h-auto bg-white">
+            @php
+                $bpjsPhoto = collect(['bpjs.jpg', 'bpjs.png', 'bpjs.jpeg'])
+                    ->first(fn ($f) => file_exists(public_path('images/' . $f)));
+            @endphp
+            @if ($bpjsPhoto)
+                <img src="{{ asset('images/' . $bpjsPhoto) }}" alt="Layanan BPJS Kesehatan Arifa Medikal Klinik"
+                    class="absolute inset-0 h-full w-full object-contain p-6 md:p-10">
+            @else
+                <div class="absolute inset-0 bg-green-100 flex flex-col items-center justify-center gap-3 text-green-500">
+                    <i class="fa-solid fa-hand-holding-medical text-6xl"></i>
+                    <span class="text-sm font-semibold">Letakkan foto di public/images/bpjs.jpg</span>
+                </div>
+            @endif
         </div>
-        <a href="{{ route('page.kontak') }}" class="text-sm font-semibold text-green-700 hover:underline">
-            Info selengkapnya <i class="fa-solid fa-arrow-right ml-1"></i>
-        </a>
     </div>
 </section>
 
@@ -132,8 +155,8 @@
     </div>
 </section>
 
-{{-- DIPERCAYA OLEH (DARI DATABASE) --}}
-<section class="py-14 bg-white border-t border-slate-100 overflow-hidden">
+{{-- DIPERCAYA OLEH (LOGO UTUH, RESPONSIF) --}}
+<section class="py-14 bg-white border-t border-slate-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
         <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Dipercaya Oleh</p>
         <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-2">Perusahaan & Mitra Kerja Sama</h2>
@@ -141,30 +164,36 @@
 
     @php $mitras = \App\Models\Mitra::latest()->get(); @endphp
 
-    <div class="marquee mt-8" data-aos="fade-up" data-aos-delay="100">
-        <div class="marquee-track items-stretch">
-            @for ($round = 0; $round < 2; $round++)
-                @forelse ($mitras as $m)
-                    <div class="shrink-0 mr-4 w-72 bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
-                        <div class="h-32 bg-sky-50 flex items-center justify-center overflow-hidden">
-                            @if ($m->photo)
-                                <img src="{{ asset('uploads/mitra/' . $m->photo) }}" alt="{{ $m->name }}" loading="lazy" class="h-full w-full object-cover">
-                            @else
-                                <i class="fa-solid fa-building text-4xl text-sky-300"></i>
-                            @endif
+    <div class="relative mt-8" data-aos="fade-up" data-aos-delay="100">
+        <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-28 bg-gradient-to-r from-white to-transparent"></div>
+        <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-28 bg-gradient-to-l from-white to-transparent"></div>
+
+        <div class="marquee">
+            <div class="marquee-track items-stretch">
+                @for ($round = 0; $round < 2; $round++)
+                    @forelse ($mitras as $m)
+                        <div class="shrink-0 mr-5 w-64 md:w-72 bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
+                            <div class="h-28 md:h-32 bg-white border-b border-slate-100 flex items-center justify-center overflow-hidden p-4">
+                                @if ($m->photo)
+                                    <img src="{{ asset('uploads/mitra/' . $m->photo) }}" alt="{{ $m->name }}" loading="lazy"
+                                        class="max-h-full max-w-full object-contain">
+                                @else
+                                    <i class="fa-solid fa-building text-4xl text-sky-300"></i>
+                                @endif
+                            </div>
+                            <div class="p-4 h-24">
+                                <p class="font-bold text-slate-800 text-sm truncate">{{ $m->name }}</p>
+                                <p class="text-xs text-slate-500 mt-1 line-clamp-2">{{ $m->description ?? 'Mitra kerja sama Arifa Medikal Klinik.' }}</p>
+                            </div>
                         </div>
-                        <div class="p-4">
-                            <p class="font-bold text-slate-800 text-sm">{{ $m->name }}</p>
-                            <p class="text-xs text-slate-500 mt-1">{{ $m->description ?? 'Mitra kerja sama Arifa Medikal Klinik.' }}</p>
+                    @empty
+                        <div class="shrink-0 mr-5 w-64 md:w-72 bg-white border border-slate-100 rounded-2xl shadow-sm p-6 text-center text-slate-400 text-sm">
+                            <i class="fa-solid fa-handshake text-3xl text-sky-300 block mb-2"></i>
+                            Mitra belum ditambahkan — kelola via menu Mitra Perusahaan di dashboard.
                         </div>
-                    </div>
-                @empty
-                    <div class="shrink-0 mr-4 w-72 bg-white border border-slate-100 rounded-2xl shadow-sm p-6 text-center text-slate-400 text-sm">
-                        <i class="fa-solid fa-handshake text-3xl text-sky-300 block mb-2"></i>
-                        Mitra belum ditambahkan — kelola via menu Mitra Perusahaan di dashboard.
-                    </div>
-                @endforelse
-            @endfor
+                    @endforelse
+                @endfor
+            </div>
         </div>
     </div>
 </section>
@@ -199,8 +228,8 @@
     </div>
 </section>
 
-{{-- GALERI (DARI DATABASE: FOTO + JUDUL + DESKRIPSI) --}}
-<section class="py-16 bg-white overflow-hidden">
+{{-- GALERI (FOTO KEGIATAN TETAP OBJECT-COVER) --}}
+<section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
         <div class="flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -216,42 +245,47 @@
 
     @php $galleries = \App\Models\Gallery::latest()->get(); @endphp
 
-    <div class="marquee mt-10" data-aos="fade-up" data-aos-delay="100">
-        <div class="marquee-track items-stretch">
-            @for ($round = 0; $round < 2; $round++)
-                @forelse ($galleries as $g)
-                    <div class="shrink-0 mr-4 w-80 bg-white border border-slate-100 rounded-2xl shadow-md overflow-hidden">
-                        <div class="h-56 bg-slate-50 overflow-hidden">
-                            @if ($g->photo)
-                                <img src="{{ asset('uploads/galeri/' . $g->photo) }}" alt="{{ $g->title }}" loading="lazy" class="h-full w-full object-cover">
-                            @else
-                                <div class="h-full flex items-center justify-center text-slate-300"><i class="fa-solid fa-image text-4xl"></i></div>
-                            @endif
+    <div class="relative mt-10" data-aos="fade-up" data-aos-delay="100">
+        <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-28 bg-gradient-to-r from-white to-transparent"></div>
+        <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-28 bg-gradient-to-l from-white to-transparent"></div>
+
+        <div class="marquee">
+            <div class="marquee-track items-stretch">
+                @for ($round = 0; $round < 2; $round++)
+                    @forelse ($galleries as $g)
+                        <div class="shrink-0 mr-5 w-64 md:w-80 bg-white border border-slate-100 rounded-2xl shadow-md overflow-hidden">
+                            <div class="h-44 md:h-52 bg-slate-100 overflow-hidden">
+                                @if ($g->photo)
+                                    <img src="{{ asset('uploads/galeri/' . $g->photo) }}" alt="{{ $g->title }}" loading="lazy" class="h-full w-full object-cover">
+                                @else
+                                    <div class="h-full flex items-center justify-center text-slate-300"><i class="fa-solid fa-image text-4xl"></i></div>
+                                @endif
+                            </div>
+                            <div class="p-4 h-24">
+                                <p class="font-bold text-slate-800 text-sm truncate">{{ $g->title }}</p>
+                                <p class="text-xs text-slate-500 mt-1 line-clamp-2">{{ $g->description ?? '' }}</p>
+                            </div>
                         </div>
-                        <div class="p-4">
-                            <p class="font-bold text-slate-800 text-sm">{{ $g->title }}</p>
-                            <p class="text-xs text-slate-500 mt-1">{{ $g->description ?? '' }}</p>
-                        </div>
-                    </div>
-                @empty
-                    @foreach ([
-                        ['fa-solid fa-stethoscope', 'Konsultasi Dokter'],
-                        ['fa-solid fa-heart-pulse', 'Treadmill / EKG'],
-                        ['fa-solid fa-wave-square', 'Audiometri'],
-                        ['fa-solid fa-tooth', 'Dokter Gigi'],
-                        ['fa-solid fa-flask', 'Laboratorium'],
-                        ['fa-solid fa-bed-pulse', 'UGD'],
-                    ] as $ph)
-                        <div class="h-56 w-80 shrink-0 mr-4 rounded-2xl border border-slate-100 bg-slate-50 flex flex-col items-center justify-center gap-3">
-                            <i class="{{ $ph[0] }} text-4xl text-sky-500"></i>
-                            <span class="text-sm font-semibold text-slate-500">{{ $ph[1] }}</span>
-                        </div>
-                    @endforeach
-                @endforelse
-            @endfor
+                    @empty
+                        @foreach ([
+                            ['fa-solid fa-stethoscope', 'Konsultasi Dokter'],
+                            ['fa-solid fa-heart-pulse', 'Treadmill / EKG'],
+                            ['fa-solid fa-wave-square', 'Audiometri'],
+                            ['fa-solid fa-tooth', 'Dokter Gigi'],
+                            ['fa-solid fa-flask', 'Laboratorium'],
+                            ['fa-solid fa-bed-pulse', 'UGD'],
+                        ] as $ph)
+                            <div class="h-64 w-64 md:w-80 shrink-0 mr-5 rounded-2xl border border-slate-100 bg-slate-50 flex flex-col items-center justify-center gap-3">
+                                <i class="{{ $ph[0] }} text-4xl text-sky-500"></i>
+                                <span class="text-sm font-semibold text-slate-500">{{ $ph[1] }}</span>
+                            </div>
+                        @endforeach
+                    @endforelse
+                @endfor
+            </div>
         </div>
     </div>
-    <p class="text-center text-xs text-slate-400 mt-4">Kelola foto mitra & galeri melalui dashboard admin — tampil otomatis di halaman ini.</p>
+    <p class="text-center text-xs text-slate-400 mt-6">Kelola foto mitra & galeri melalui dashboard admin — tampil otomatis di halaman ini.</p>
 </section>
 
 {{-- KEUNGGULAN SINGKAT --}}

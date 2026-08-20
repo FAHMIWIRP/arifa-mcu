@@ -6,13 +6,15 @@
             <p class="text-sm text-slate-500 mt-1">Foto kegiatan yang tampil pada marquee "Galeri Klinik" di landing page.</p>
         </div>
 
-        @if (session('success'))
-            <div class="bg-green-50 border-l-4 border-green-500 text-green-800 px-4 py-3 rounded-xl text-sm shadow-sm">{{ session('success') }}</div>
-        @endif
-
         <div class="bg-white rounded-2xl border border-slate-200 p-6">
             <h3 class="font-bold text-slate-900">Tambah Galeri</h3>
-            <form method="POST" action="{{ route('galleries.store') }}" enctype="multipart/form-data" class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4">
+            <form method="POST" action="{{ route('galleries.store') }}" enctype="multipart/form-data"
+                class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4"
+                data-confirm="Simpan foto galeri baru?"
+                data-confirm-text="Foto akan tampil pada marquee galeri di landing page."
+                data-confirm-icon="question"
+                data-confirm-color="#0284c7"
+                data-confirm-button="Ya, Simpan">
                 @csrf
                 <div>
                     <label class="block text-sm font-semibold text-slate-700">Judul <span class="text-red-600">*</span></label>
@@ -45,12 +47,22 @@
                     <div class="p-4">
                         <p class="font-bold text-slate-800 text-sm">{{ $g->title }}</p>
                         <p class="text-xs text-slate-500 mt-1">{{ $g->description ?? '-' }}</p>
-                        <form method="POST" action="{{ route('galleries.destroy', $g) }}" class="mt-3" onsubmit="return confirm('Hapus galeri ini?')">
-                            @csrf @method('DELETE')
-                            <button class="h-8 px-3 rounded-lg bg-red-50 text-red-700 hover:bg-red-100 text-xs font-semibold">
-                                <i class="fa-solid fa-trash mr-1"></i> Hapus
-                            </button>
-                        </form>
+                        <div class="mt-3 flex items-center gap-1.5">
+                            <a href="{{ route('galleries.edit', $g) }}"
+                                class="inline-flex items-center justify-center h-8 px-3 rounded-lg bg-sky-50 text-sky-700 hover:bg-sky-100 text-xs font-semibold">
+                                <i class="fa-solid fa-pen mr-1"></i> Ubah
+                            </a>
+                            <form method="POST" action="{{ route('galleries.destroy', $g) }}"
+                                data-confirm="Hapus galeri ini?"
+                                data-confirm-text="Foto juga akan dihapus dari server."
+                                data-confirm-button="Ya, Hapus">
+                                @csrf @method('DELETE')
+                                <button type="submit"
+                                    class="inline-flex items-center justify-center h-8 px-3 rounded-lg bg-red-50 text-red-700 hover:bg-red-100 text-xs font-semibold">
+                                    <i class="fa-solid fa-trash mr-1"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             @empty

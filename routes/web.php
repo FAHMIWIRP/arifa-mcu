@@ -53,8 +53,8 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::resource('patients', PatientController::class);
     Route::resource('doctors', DoctorController::class)->only(['index', 'store']);
-    Route::resource('mitras', MitraController::class)->only(['index', 'store', 'destroy']);
-    Route::resource('galleries', GalleryController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('mitras', MitraController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('galleries', GalleryController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);
 
     Route::get('/reports', [McuSessionController::class, 'reports'])->name('reports.index');
 
