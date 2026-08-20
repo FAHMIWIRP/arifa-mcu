@@ -7,7 +7,7 @@
         <p class="text-xs font-bold text-sky-600 uppercase tracking-widest">Beranda / Layanan</p>
         <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2">Layanan Kami</h1>
         <p class="text-slate-500 mt-3 max-w-2xl">
-            Solusi lengkap pengelolaan medical check-up untuk klinik, laboratorium, dan perusahaan mitra.
+            Solusi lengkap pengelolaan medical check-up untuk klinik, laboratorium, dan perusahaan mitra — termasuk pelayanan peserta BPJS Kesehatan.
         </p>
     </div>
 </section>
@@ -24,6 +24,16 @@
                 <li><i class="fa-solid fa-check text-sky-600 mr-1.5"></i>Kesimpulan kelayakan kerja</li>
             </ul>
         </div>
+        <div class="bg-white rounded-2xl border border-green-100 p-7 hover:shadow-lg hover:-translate-y-1 transition" data-aos="fade-up" data-aos-delay="50">
+            <div class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center text-xl"><i class="fa-solid fa-hand-holding-medical"></i></div>
+            <h3 class="font-bold mt-4 text-slate-900">Layanan BPJS Kesehatan</h3>
+            <p class="text-sm text-slate-500 mt-2">Kami menerima peserta BPJS Kesehatan untuk pelayanan pemeriksaan sesuai ketentuan.</p>
+            <ul class="mt-4 space-y-1.5 text-xs text-slate-600">
+                <li><i class="fa-solid fa-check text-green-600 mr-1.5"></i>Kerja sama resmi BPJS Kesehatan</li>
+                <li><i class="fa-solid fa-check text-green-600 mr-1.5"></i>Alur klaim dibantu petugas</li>
+                <li><i class="fa-solid fa-check text-green-600 mr-1.5"></i>Pelayanan setara pasien umum</li>
+            </ul>
+        </div>
         <div class="bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-lg hover:-translate-y-1 transition" data-aos="fade-up" data-aos-delay="100">
             <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl"><i class="fa-solid fa-file-pdf"></i></div>
             <h3 class="font-bold mt-4 text-slate-900">Laporan PDF Otomatis</h3>
@@ -34,7 +44,7 @@
                 <li><i class="fa-solid fa-check text-red-600 mr-1.5"></i>Lampiran lab, radiologi, EKG</li>
             </ul>
         </div>
-        <div class="bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-lg hover:-translate-y-1 transition" data-aos="fade-up" data-aos-delay="200">
+        <div class="bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-lg hover:-translate-y-1 transition" data-aos="fade-up">
             <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl"><i class="fa-solid fa-box-archive"></i></div>
             <h3 class="font-bold mt-4 text-slate-900">Rekam Medis Digital</h3>
             <p class="text-sm text-slate-500 mt-2">Riwayat pemeriksaan tersimpan aman dan dapat ditelusuri kapan pun.</p>
@@ -44,7 +54,7 @@
                 <li><i class="fa-solid fa-check text-sky-600 mr-1.5"></i>Data terlindungi hak akses</li>
             </ul>
         </div>
-        <div class="bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-lg hover:-translate-y-1 transition" data-aos="fade-up">
+        <div class="bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-lg hover:-translate-y-1 transition" data-aos="fade-up" data-aos-delay="50">
             <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl"><i class="fa-solid fa-flask"></i></div>
             <h3 class="font-bold mt-4 text-slate-900">Interpretasi Lab Otomatis</h3>
             <p class="text-sm text-slate-500 mt-2">Hematologi, kimia darah, dan urinalisis dengan nilai rujukan otomatis.</p>
@@ -64,7 +74,7 @@
                 <li><i class="fa-solid fa-check text-sky-600 mr-1.5"></i>Ringkasan harian</li>
             </ul>
         </div>
-        <div class="bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-lg hover:-translate-y-1 transition" data-aos="fade-up" data-aos-delay="200">
+        <div class="bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-lg hover:-translate-y-1 transition" data-aos="fade-up">
             <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl"><i class="fa-solid fa-handshake"></i></div>
             <h3 class="font-bold mt-4 text-slate-900">Paket Perusahaan</h3>
             <p class="text-sm text-slate-500 mt-2">Skema langganan bulanan yang fleksibel bagi klinik dan mitra korporasi.</p>

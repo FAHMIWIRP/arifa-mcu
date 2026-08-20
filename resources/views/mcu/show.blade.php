@@ -44,11 +44,15 @@
 
     <div class="print-sheet bg-white border border-slate-200 rounded-2xl p-8 text-[13px] leading-relaxed text-slate-900">
 
-        {{-- KOP SURAT --}}
-        <div class="text-center border-b-4 border-double border-slate-800 pb-3">
-            <h1 class="text-xl font-extrabold tracking-wide">ARIFA MEDIKAL KLINIK</h1>
-            <p class="text-[11px] mt-1">Jln. Banda Aceh–Medan No.22 Desa Blang Pulo, Kecamatan Muara Satu, Kota Lhokseumawe</p>
-            <p class="text-[11px]">Email: klinik_arifamedikal@yahoo.com | Website: www.arifamedikalklinik.com | Telp: 0645-8451168, HP: 0852-6060-1909</p>
+        {{-- KOP SURAT DENGAN LOGO --}}
+        <div class="flex items-center gap-4 border-b-4 border-double border-slate-800 pb-3">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo Arifa Medikal Klinik" class="h-16 w-auto shrink-0">
+            <div class="flex-1 text-center">
+                <h1 class="text-xl font-extrabold tracking-wide">ARIFA MEDIKAL KLINIK</h1>
+                <p class="text-[11px] mt-0.5">Jln. Banda Aceh–Medan No.22 Desa Blang Pulo, Kecamatan Muara Satu, Kota Lhokseumawe</p>
+                <p class="text-[11px]">Email: klinik_arifamedikal@yahoo.com | Website: www.arifamedikalklinik.com | Telp: 0645-8451168, HP: 0852-6060-1909</p>
+            </div>
+            <div class="w-10 shrink-0"></div>
         </div>
 
         <h2 class="text-center font-bold underline mt-4 mb-3 text-sm">ANAMNESA DAN PEMERIKSAAN FISIK</h2>
@@ -56,7 +60,7 @@
         {{-- IDENTITAS --}}
         <table class="w-full">
             <tr>
-                <td class="w-28 py-0.5">Nama</td><td class="w-3">:</td><td class="font-bold">{{ $p->name }}</td>
+                <td class="w-32 py-0.5">Nama</td><td class="w-3">:</td><td class="font-bold">{{ $p->name }}</td>
                 <td class="w-32 py-0.5">Tgl. Pemeriksaan</td><td class="w-3">:</td><td>{{ $mcu->examination_date->format('d-m-Y') }}</td>
             </tr>
             <tr>
@@ -68,11 +72,16 @@
                 <td class="py-0.5">Perusahaan</td><td>:</td><td>{{ $p->company_name ?? '-' }}</td>
             </tr>
             <tr>
-                <td class="py-0.5 align-top" rowspan="3">Alamat</td><td class="align-top" rowspan="3">:</td><td rowspan="3">{{ $p->address ?? '-' }}</td>
+                <td class="py-0.5 align-top">Alamat</td><td class="align-top">:</td><td colspan="4" class="py-0.5">{{ $p->address ?? '-' }}</td>
+            </tr>
+            <tr>
+                <td class="py-0.5">No HP</td><td>:</td><td>{{ $p->phone ?? '-' }}</td>
                 <td class="py-0.5">Bagian/ Seksi</td><td>:</td><td>{{ $p->department ?? '-' }}</td>
             </tr>
-            <tr><td class="py-0.5">No HP</td><td>:</td><td>{{ $p->phone ?? '-' }}</td></tr>
-            <tr><td class="py-0.5">No MCU</td><td>:</td><td>{{ $p->mcu_number }}</td></tr>
+            <tr>
+                <td class="py-0.5">No MCU</td><td>:</td><td>{{ $p->mcu_number }}</td>
+                <td></td><td></td><td></td>
+            </tr>
         </table>
 
         {{-- I. RIWAYAT TERDAHULU --}}

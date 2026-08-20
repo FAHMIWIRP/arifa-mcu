@@ -9,6 +9,21 @@ use Illuminate\Http\Request;
 
 class McuSessionController extends Controller
 {
+    public function reports(Request $request)
+    {
+        $sessions = McuSession::with('patient')
+            ->when($request->search, function ($q, $s) {
+                $q->whereHas('patient', fn ($qq) => $qq
+                    ->where('name', 'like', "%{$s}%")
+                    ->orWhere('mcu_number', 'like', "%{$s}%")
+                    ->orWhere('company_name', 'like', "%{$s}%"));
+            })
+            ->orderByDesc('examination_date')
+            ->paginate(15);
+
+        return view('mcu.reports', compact('sessions'));
+    }
+
     public function index(Patient $patient)
     {
         $sessions = $patient->mcuSessions()->latest()->get();

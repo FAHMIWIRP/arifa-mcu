@@ -24,7 +24,7 @@
 
         .med-pattern { background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 4h4v8h8v4h-8v8h-4v-8H4v-4h8z' fill='%230ea5e9' fill-opacity='0.06'/%3E%3C/svg%3E"); }
 
-        #toTop { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 60; opacity: 0; pointer-events: none; transform: translateY(8px); transition: all .3s ease; }
+        #toTop { position: fixed; right: 1.25rem; bottom: 6.5rem; z-index: 60; opacity: 0; pointer-events: none; transform: translateY(8px); transition: all .3s ease; }
         #toTop.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
         .swiper-pagination-bullet-active { background: #0284c7; }
@@ -104,6 +104,9 @@
             © 2026 Arifa Medikal Klinik. Seluruh hak cipta dilindungi.
         </div>
     </footer>
+
+    {{-- Tombol WhatsApp melayang --}}
+    <x-whatsapp-float />
 
     <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
         class="bg-sky-600 hover:bg-sky-700 text-white w-11 h-11 rounded-xl shadow-lg">

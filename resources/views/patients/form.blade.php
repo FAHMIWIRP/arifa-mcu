@@ -6,8 +6,12 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div>
-        <label class="block text-sm font-semibold text-slate-700">No MCU <span class="text-red-600">*</span></label>
-        <input type="text" name="mcu_number" value="{{ old('mcu_number', $patient->mcu_number) }}" class="mt-1 w-full rounded-xl border-slate-300" required>
+        <label class="block text-sm font-semibold text-slate-700">
+            No MCU <span class="text-red-600">*</span>
+            <span class="ml-1 text-xs font-normal text-slate-400">(otomatis — dapat diubah)</span>
+        </label>
+        <input type="text" name="mcu_number" value="{{ old('mcu_number', $patient->mcu_number ?? ($nextMcu ?? '')) }}"
+            class="mt-1 w-full rounded-xl border-slate-300 bg-slate-50 font-semibold text-sky-700" required>
     </div>
     <div>
         <label class="block text-sm font-semibold text-slate-700">Nama Lengkap <span class="text-red-600">*</span></label>

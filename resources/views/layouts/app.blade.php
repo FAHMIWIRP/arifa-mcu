@@ -18,7 +18,6 @@
     </head>
     <body class="font-sans antialiased bg-slate-100" x-data="{ sidebarOpen: false }">
 
-        {{-- Bar atas (khusus mobile) --}}
         <div class="lg:hidden sticky top-0 z-40 bg-white border-b border-slate-200 flex items-center justify-between px-4 h-14">
             <button @click="sidebarOpen = true" class="w-10 h-10 rounded-lg border border-slate-200 text-slate-600">
                 <i class="fa-solid fa-bars"></i>
@@ -29,11 +28,9 @@
             </a>
         </div>
 
-        {{-- Lapisan gelap saat sidebar mobile terbuka --}}
         <div x-show="sidebarOpen" x-cloak @click="sidebarOpen = false"
             class="lg:hidden fixed inset-0 z-40 bg-slate-900/50"></div>
 
-        {{-- SIDEBAR --}}
         <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
             class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col transition-transform duration-200 lg:translate-x-0">
 
@@ -55,6 +52,30 @@
                 <a href="{{ route('patients.index') }}"
                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm {{ request()->routeIs('patients.*') || request()->routeIs('mcu.*') ? 'bg-sky-50 text-sky-700 font-semibold' : 'text-slate-600 font-medium hover:bg-slate-50 hover:text-slate-900' }}">
                     <i class="fa-solid fa-users w-5 text-center"></i> Data Pasien
+                </a>
+
+                <a href="{{ route('reports.index') }}"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm {{ request()->routeIs('reports.*') ? 'bg-sky-50 text-sky-700 font-semibold' : 'text-slate-600 font-medium hover:bg-slate-50 hover:text-slate-900' }}">
+                    <i class="fa-solid fa-folder-open w-5 text-center"></i> Arsip Laporan
+                </a>
+
+                <p class="px-3 mt-6 mb-2 text-xs font-bold uppercase tracking-wider text-slate-400">Manajemen</p>
+
+                <a href="{{ route('doctors.index') }}"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm {{ request()->routeIs('doctors.*') ? 'bg-sky-50 text-sky-700 font-semibold' : 'text-slate-600 font-medium hover:bg-slate-50 hover:text-slate-900' }}">
+                    <i class="fa-solid fa-user-doctor w-5 text-center"></i> Dokter Penanggung Jawab
+                </a>
+
+                <p class="px-3 mt-6 mb-2 text-xs font-bold uppercase tracking-wider text-slate-400">Konten Situs</p>
+
+                <a href="{{ route('mitras.index') }}"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm {{ request()->routeIs('mitras.*') ? 'bg-sky-50 text-sky-700 font-semibold' : 'text-slate-600 font-medium hover:bg-slate-50 hover:text-slate-900' }}">
+                    <i class="fa-solid fa-handshake w-5 text-center"></i> Mitra Perusahaan
+                </a>
+
+                <a href="{{ route('galleries.index') }}"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm {{ request()->routeIs('galleries.*') ? 'bg-sky-50 text-sky-700 font-semibold' : 'text-slate-600 font-medium hover:bg-slate-50 hover:text-slate-900' }}">
+                    <i class="fa-solid fa-images w-5 text-center"></i> Galeri Klinik
                 </a>
 
                 <p class="px-3 mt-6 mb-2 text-xs font-bold uppercase tracking-wider text-slate-400">Lainnya</p>
@@ -89,7 +110,6 @@
             </div>
         </aside>
 
-        {{-- KONTEN --}}
         <div class="lg:pl-64">
             <main class="p-4 sm:p-6 lg:p-8">
                 {{ $slot }}

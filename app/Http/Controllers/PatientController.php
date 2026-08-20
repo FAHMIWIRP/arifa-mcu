@@ -24,12 +24,17 @@ class PatientController extends Controller
 
     public function create()
     {
-        return view('patients.create', ['patient' => new Patient]);
+        // Penomoran No MCU otomatis: nomor terbesar + 1 (mulai 2426 bila kosong)
+        $nextMcu = ((int) Patient::max('mcu_number')) + 1;
+        if ($nextMcu < 2426) $nextMcu = 2426;
+
+        return view('patients.create', ['patient' => new Patient, 'nextMcu' => $nextMcu]);
     }
 
     public function store(Request $request)
     {
         Patient::create($request->validate($this->rules()));
+
         return redirect()->route('patients.index')->with('success', 'Data pasien berhasil disimpan.');
     }
 
@@ -41,19 +46,22 @@ class PatientController extends Controller
     public function update(Request $request, Patient $patient)
     {
         $patient->update($request->validate($this->rules($patient->id)));
+
         return redirect()->route('patients.index')->with('success', 'Data pasien berhasil diperbarui.');
     }
 
     public function destroy(Patient $patient)
     {
         $patient->delete();
+
         return redirect()->route('patients.index')->with('success', 'Data pasien berhasil dihapus.');
     }
 
     private function rules(?int $ignoreId = null): array
     {
         return [
-            'mcu_number' => ['required', 'string', 'max:30', Rule::unique('patients', 'mcu_number')->ignore($ignoreId)],
+            'mcu_number' => ['required', 'string', 'max:30',
+                Rule::unique('patients', 'mcu_number')->ignore($ignoreId)],
             'name' => ['required', 'string', 'max:100'],
             'gender' => ['required', 'in:Pria,Wanita'],
             'nik' => ['nullable', 'string', 'max:20'],
